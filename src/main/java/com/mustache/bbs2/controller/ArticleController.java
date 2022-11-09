@@ -31,6 +31,7 @@ public class ArticleController {
         return "articles/list";
     }
 
+
     @GetMapping("")
     public String index(){
         return "redirect:/articles/list";
@@ -83,5 +84,11 @@ public class ArticleController {
 
         return String.format("redirect:/articles/%d",
                 savedArticle.getId());
+    }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        articleRepository.deleteById(id);
+        return "redirect:/articles";
     }
 }
