@@ -17,13 +17,17 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/articles")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class ArticleController {
 
     private final ArticleRepository articleRepository;
 
-//    findAll()한 결과를 list로 넘김
+    public ArticleController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
+
+    //    findAll()한 결과를 list로 넘김
     @GetMapping("/list")
     public String list(Model model){
         List<Article> articles = articleRepository.findAll();
@@ -37,7 +41,7 @@ public class ArticleController {
     }
 
     @GetMapping("/new")
-    public String createPage() {
+    public String createArticlePage() {
         return "articles/new";
     }
 
@@ -53,7 +57,7 @@ public class ArticleController {
     }
 
     @PostMapping("")
-    public String add(ArticleDto articleDto){
+    public String createArticle(ArticleDto articleDto){
         log.info(articleDto.getTitle());
         Article savedArticle = articleRepository.save(articleDto.toEntity());
         log.info("generatedId:{}", savedArticle.getId());

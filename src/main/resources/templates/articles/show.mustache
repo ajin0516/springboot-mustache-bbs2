@@ -1,0 +1,10 @@
+{{> layouts/header}}
+    <div>
+        이 페이지는 show 입니다
+        {{#article}}
+            {{id}}{{title}}{{content}}
+        {{/article}}
+        <a href="/articles/new">new article</a>
+        <a href="list">list article</a>
+    </div>
+{{> layouts/footer}}
